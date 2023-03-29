@@ -10,7 +10,6 @@ export class Searchbar extends Component {
   }
   handleChange = evt => {
     this.setState({ inputValue: evt.currentTarget.value });
-    console.log(this.state.inputValue);
   };
   handleSubmit = evt => {
     const { inputValue } = this.state;
