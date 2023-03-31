@@ -1,7 +1,7 @@
 import css from './ImageGalleryItem.module.css';
-const ImageGalleryItem = ({ image, tags }) => {
+const ImageGalleryItem = ({ image, alt }) => (
   <li className={css.item}>
-    <img className={css.itemImage} src={image} alt={tags} />
-  </li>;
-};
+    <img className={css.itemImage} src={image} alt={alt} />
+  </li>
+);
 export default ImageGalleryItem;

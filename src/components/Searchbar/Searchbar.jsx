@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import css from './Searchbar.module.css';
 
-export class Searchbar extends Component {
+class Searchbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,3 +40,4 @@ export class Searchbar extends Component {
     );
   }
 }
+export default Searchbar;
