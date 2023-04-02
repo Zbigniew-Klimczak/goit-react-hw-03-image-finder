@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import axios from 'axios';
+import { ProgressBar } from 'react-loader-spinner';
 import css from './App.module.css';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
@@ -25,7 +26,7 @@ export class App extends Component {
   };
   getImagesOnSubmit = async actualInputValue => {
     try {
-      this.setState({ isLoading: true });
+      this.setState({ images: [], isLoading: true });
       const response = await axios.get(
         `https://pixabay.com/api/?q=${actualInputValue}&page=1&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
       );
@@ -55,11 +56,12 @@ export class App extends Component {
     }
   };
   render() {
-    const { images, totalImages } = this.state;
+    const { images, totalImages, isLoading } = this.state;
     return (
       <div className={css.app}>
         <Searchbar onSubmit={this.onSubmit}></Searchbar>
         <ImageGallery images={this.state.images}></ImageGallery>
+        {isLoading === true && <ProgressBar width="100%" />}
         {images.length < totalImages && (
           <Button loadMore={this.onLoadMore}></Button>
         )}
