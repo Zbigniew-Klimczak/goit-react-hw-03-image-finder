@@ -55,6 +55,7 @@ export class App extends Component {
       this.setState({ isLoading: false });
     }
   };
+
   render() {
     const { images, totalImages, isLoading } = this.state;
     return (
