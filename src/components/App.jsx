@@ -5,6 +5,7 @@ import css from './App.module.css';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
+import Modal from './Modal/Modal';
 const API_KEY = '33245282-6e238748bd483492097eba1b8';
 export class App extends Component {
   state = {
@@ -13,6 +14,8 @@ export class App extends Component {
     actualPage: 1,
     totalImages: 0,
     isLoading: false,
+    isModalOpen: false,
+    modalImageObject: {},
   };
   onSubmit = inputValue => {
     this.setState({ actualInputValue: inputValue, actualPage: 1 });
@@ -55,16 +58,30 @@ export class App extends Component {
       this.setState({ isLoading: false });
     }
   };
-
+  openModal = imageId => {
+    const { images } = this.state;
+    const modalImage = images.find(image => image.id === imageId);
+    this.setState({ isModalOpen: true, modalImageObject: modalImage });
+  };
+  closeModal = () => {
+    this.setState({ isModalOpen: false });
+  };
   render() {
-    const { images, totalImages, isLoading } = this.state;
+    const { images, totalImages, isLoading, isModalOpen, modalImageObject } =
+      this.state;
     return (
       <div className={css.app}>
         <Searchbar onSubmit={this.onSubmit}></Searchbar>
-        <ImageGallery images={this.state.images}></ImageGallery>
+        <ImageGallery
+          images={this.state.images}
+          openModal={this.openModal}
+        ></ImageGallery>
         {isLoading === true && <ProgressBar width="100%" />}
         {images.length < totalImages && (
           <Button loadMore={this.onLoadMore}></Button>
+        )}
+        {isModalOpen === true && (
+          <Modal imageObject={modalImageObject} closeModal={this.closeModal} />
         )}
       </div>
     );
