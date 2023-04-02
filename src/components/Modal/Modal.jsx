@@ -1,4 +1,5 @@
 import css from './Modal.module.css';
+import PropTypes from 'prop-types';
 const Modal = ({ imageObject, closeModal }) => (
   <div
     id="overlay"
@@ -15,3 +16,7 @@ const Modal = ({ imageObject, closeModal }) => (
   </div>
 );
 export default Modal;
+Modal.propTypes = {
+  imageObject: PropTypes.object,
+  closeModal: PropTypes.func,
+};
