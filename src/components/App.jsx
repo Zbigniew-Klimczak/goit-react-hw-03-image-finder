@@ -26,7 +26,7 @@ export class App extends Component {
   };
   getImagesOnSubmit = async actualInputValue => {
     try {
-      this.setState({ images: [], isLoading: true });
+      this.setState({ images: [], isLoading: true, totalImages: 0 });
       const response = await axios.get(
         `https://pixabay.com/api/?q=${actualInputValue}&page=1&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
       );
